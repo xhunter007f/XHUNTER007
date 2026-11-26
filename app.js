@@ -37,7 +37,7 @@
     "Persona 3 Reload":2161700,"Like a Dragon: Infinite Wealth":2072450,"Baldur's Gate 3":1086940,"Diablo IV":2344520,
     "Assassin's Creed Shadows":3159330,"Indiana Jones and the Great Circle":2677660,"DOOM: The Dark Ages":3017860,
     "The Crew Motorfest":2698940,"F1 25":3059520,"Remnant II":1282100,"Granblue Fantasy: Relink":881020,
-    "Avatar: Frontiers of Pandora":2840770
+    "Avatar: Frontiers of Pandora":2840770,"Warhammer 40,000: Space Marine 2":2183900
   });
   const expansionGames = [
     ...[
@@ -65,7 +65,7 @@
       ["Like a Dragon: Infinite Wealth","Adventure"],["Baldur's Gate 3","Adventure"],["Diablo IV","Action"],
       ["Assassin's Creed Shadows","Adventure"],["Indiana Jones and the Great Circle","Adventure"],["DOOM: The Dark Ages","Action"],
       ["The Crew Motorfest","Racing"],["F1 25","Racing"],["Remnant II","Action"],["Granblue Fantasy: Relink","Adventure"],
-      ["Avatar: Frontiers of Pandora","Adventure"],["Alan Wake 2","Adventure"]
+      ["Avatar: Frontiers of Pandora","Adventure"],["Warhammer 40,000: Space Marine 2","Action"]
     ].map((x,i)=>({id:"ps5-extra-"+i,name:x[0],platform:"PS5",genre:x[1],image:"",link:"",description:""}))
   ];
   expansionGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
