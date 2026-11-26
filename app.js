@@ -68,9 +68,9 @@
       ["Avatar: Frontiers of Pandora","Adventure"],["Warhammer 40,000: Space Marine 2","Action"]
     ].map((x,i)=>({id:"ps5-extra-"+i,name:x[0],platform:"PS5",genre:x[1],image:"",link:"",description:""}))
   ];
-  expansionGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
   const initialCatalog=[...starterGames,...expansionGames];
   const coverFor = (name,platform) => coverOverrides[`${name}|${platform}`] || coverOverrides[name] || coverUrl(coverIds[name]) || "";
+  expansionGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
   starterGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
   let games = loadGames();
   function loadGames(){
