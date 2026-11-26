@@ -32,6 +32,11 @@
   function openAdmin(){dialog.showModal();}
   function resetForm(){ $("gameForm").reset();$("editId").value="";$("saveGame").textContent="حفظ اللعبة";$("cancelEdit").hidden=true; }
   function startEdit(id){const x=games.find(g=>g.id===id);if(!x)return;$("editId").value=x.id;$("gameName").value=x.name;$("gamePlatform").value=x.platform;$("gameGenre").value=x.genre;$("gameImage").value=x.image||"";$("gameLink").value=x.link||"";$("gameDescription").value=x.description||"";$("saveGame").textContent="حفظ التعديلات";$("cancelEdit").hidden=false;$("gameName").focus();$("managePanel").scrollIntoView({behavior:"smooth"});}
+  const detailsDialog=$("detailsDialog");
+  function showDetails(id){const x=games.find(g=>String(g.id)===String(id));if(!x)return;$("detailsTitle").textContent=x.name;$("detailsPlatform").textContent=x.platform;$("detailsGenre").textContent=x.genre||"غير محدد";$("detailsDescription").textContent=x.description||"لا يوجد وصف مضاف لهذه اللعبة.";const link=$("detailsLink");link.hidden=!x.link;if(x.link)link.href=x.link;$("detailsNoLink").hidden=!!x.link;detailsDialog.showModal();}
+  $("gamesGrid").addEventListener("click",e=>{const card=e.target.closest("[data-details]");if(card)showDetails(card.dataset.details);});
+  $("gamesGrid").addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches("[data-details]")){e.preventDefault();showDetails(e.target.dataset.details);}});
+  $("closeDetails").addEventListener("click",()=>detailsDialog.close());
   $("openAdmin").addEventListener("click",openAdmin);$("heroAdmin").addEventListener("click",openAdmin);$("addGameTop").addEventListener("click",()=>{openAdmin();resetForm();});$("emptyAdd").addEventListener("click",()=>{openAdmin();resetForm();});
   $("gameForm").addEventListener("submit",e=>{e.preventDefault();const id=$("editId").value;const item={id:id||String(Date.now()),name:$("gameName").value.trim(),platform:$("gamePlatform").value,genre:$("gameGenre").value,image:$("gameImage").value.trim(),link:$("gameLink").value.trim(),description:$("gameDescription").value.trim()};if(!item.name)return;if(id){games=games.map(x=>x.id===id?item:x);toast("تم تحديث اللعبة");}else{games.unshift(item);toast("تمت إضافة اللعبة");}save();resetForm();});
   $("cancelEdit").addEventListener("click",resetForm);
