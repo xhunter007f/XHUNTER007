@@ -24,6 +24,22 @@
         <label>وصف اللعبة
           <textarea id="pageGameDescription" rows="5" maxlength="240" placeholder="اكتب وصف اللعبة أو ملاحظاتك هنا..."></textarea>
         </label>
+        <section class="game-links-section">
+          <h2>روابط اللعبة</h2>
+          <div class="game-link-entry">
+            <input id="newGameLink" type="url" placeholder="الصق أي رابط هنا — https://...">
+            <button class="btn btn-ghost" id="addGameLink" type="button">＋ إضافة رابط</button>
+          </div>
+          <div id="gameLinksList" class="game-link-icons" aria-live="polite"></div>
+        </section>
+        <section class="game-links-section">
+          <h2>شرح اللعبة على يوتيوب</h2>
+          <div class="game-link-entry">
+            <input id="newYoutubeLink" type="url" placeholder="رابط فيديو YouTube">
+            <button class="btn btn-ghost" id="addYoutubeLink" type="button">＋ إضافة شرح</button>
+          </div>
+          <div id="youtubeLinksList" class="game-link-icons" aria-live="polite"></div>
+        </section>
         <div class="game-page-actions">
           <button class="btn btn-ghost" id="saveGameInfo" type="button">حفظ البيانات</button>
           <button class="btn btn-primary" id="saveAndOpenGame" type="button">حفظ وفتح رابط اللعبة ↗</button>
