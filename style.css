@@ -13,3 +13,5 @@
 
 /* Clickable text-only game cards and details */
 .game-card-clickable{cursor:pointer;text-align:right}.game-card-clickable:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}.game-cover.text-cover{background:radial-gradient(circle at 50% 35%,#61305f,#1b2441 62%,#11101b)}.details-content{padding:8px 25px 28px}.details-platform{display:inline-block;padding:7px 13px;border:1px solid var(--cyan);color:var(--cyan);font-weight:800;margin:8px 0 12px}.details-description{color:var(--muted);line-height:1.9;min-height:30px}.details-modal .btn{display:inline-block;text-decoration:none;margin-top:10px}@media(max-width:650px){.details-content{padding:8px 16px 22px}}
+
+.details-cover{display:block;width:min(190px,55%);max-height:270px;object-fit:contain;margin:8px auto 18px;border:1px solid #42e8f566;box-shadow:0 12px 32px #0008}.game-cover img{width:100%;height:100%;object-fit:cover;display:block}.game-cover .cover-placeholder[hidden]{display:none}
