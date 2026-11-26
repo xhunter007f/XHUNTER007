@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#120d1d">
+  <title>صفحة اللعبة | XHUNTER007</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="game-page-body">
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">X</span><span>XHUNTER<span class="pink">007</span></span></a>
+    <a class="btn btn-ghost" href="index.html#library">← العودة للمكتبة</a>
+  </header>
+  <main class="game-page section">
+    <div class="game-page-heading"><p class="eyebrow">XHUNTER007 · GAME SETUP</p><h1 id="pageGameName">صفحة اللعبة</h1><p class="muted" id="pageGamePlatform"></p></div>
+    <section class="game-page-card">
+      <img id="pageGameCover" class="game-page-cover" alt="غلاف اللعبة" hidden>
+      <div class="game-page-fields">
+        <label>رابط اللعبة
+          <input id="pageGameLink" type="url" placeholder="الصق رابط اللعبة هنا — https://...">
+        </label>
+        <label>وصف اللعبة
+          <textarea id="pageGameDescription" rows="5" maxlength="240" placeholder="اكتب وصف اللعبة أو ملاحظاتك هنا..."></textarea>
+        </label>
+        <div class="game-page-actions">
+          <button class="btn btn-ghost" id="saveGameInfo" type="button">حفظ البيانات</button>
+          <button class="btn btn-primary" id="saveAndOpenGame" type="button">حفظ وفتح رابط اللعبة ↗</button>
+        </div>
+        <p class="small-note">يتم حفظ الرابط والوصف في مكتبة هذا المتصفح على نفس الجهاز.</p>
+        <p id="gamePageMessage" class="game-page-message" role="status"></p>
+      </div>
+    </section>
+  </main>
+  <footer><span>© 2026 XHUNTER007</span><span>BUILT FOR THE GAME</span></footer>
+  <script src="game-page.js?v=20261126-1"></script>
+</body>
+</html>
