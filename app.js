@@ -15,7 +15,7 @@
     ].map((x,i)=>({id:"ps5-"+i,name:x[0],platform:"PS5",genre:x[1],image:"",link:"",description:""}))
   ];
   let games = loadGames();
-  function loadGames(){ try { const raw=localStorage.getItem(KEY); if(raw===null){localStorage.setItem(KEY,JSON.stringify(starterGames));return starterGames;} const data=JSON.parse(raw); return Array.isArray(data)?data:starterGames; } catch { return starterGames; } }
+  function loadGames(){ try { const raw=localStorage.getItem(KEY); if(raw===null){localStorage.setItem(KEY,JSON.stringify(starterGames));return starterGames;} const data=JSON.parse(raw); if(!Array.isArray(data)||data.length===0){localStorage.setItem(KEY,JSON.stringify(starterGames));return starterGames;} return data; } catch { localStorage.setItem(KEY,JSON.stringify(starterGames)); return starterGames; } }
   function save(){ localStorage.setItem(KEY,JSON.stringify(games)); render(); }
   function esc(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
   function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2400);}
