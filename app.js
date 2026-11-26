@@ -16,6 +16,7 @@
   ];
   const coverIds = {"Grand Theft Auto V":271590,"Red Dead Redemption 2":1174180,"God of War":1593500,"Marvel's Spider-Man":1817070,"The Last of Us Part II":2531310,"Uncharted 4: A Thief's End":1659420,"Ghost of Tsushima":2215430,"Horizon Zero Dawn":1151640,"Mortal Kombat 11":976310,"EA SPORTS FC 26":3405690,"Marvel's Spider-Man 2":2651280,"God of War Ragnarök":2322010,"Horizon Forbidden West":2420110,"Astro Bot":0,"Gran Turismo 7":0,"NBA 2K26":3472040,"Call of Duty: Black Ops 7":1938090,"Hogwarts Legacy":990080};
   const coverUrl = id => id ? `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${id}/library_600x900.jpg` : "";
+  starterGames.forEach(x=>{x.image=coverUrl(coverIds[x.name])||"";});
   let games = loadGames();
   function loadGames(){ try { const raw=localStorage.getItem(KEY); if(raw===null){localStorage.setItem(KEY,JSON.stringify(starterGames));return starterGames;} const data=JSON.parse(raw); if(!Array.isArray(data)||data.length===0){localStorage.setItem(KEY,JSON.stringify(starterGames));return starterGames;} return data.map(x=>({...x,image:x.image||coverUrl(coverIds[x.name])||""})); } catch { localStorage.setItem(KEY,JSON.stringify(starterGames)); return starterGames; } }
   function save(){ localStorage.setItem(KEY,JSON.stringify(games)); render(); }
