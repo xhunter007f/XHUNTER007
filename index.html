@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#120d1d">
+  <title>XHUNTER007 | Gaming Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="XHUNTER007 Home"><span class="brand-mark">X</span><span>XHUNTER<span class="pink">007</span></span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">☰</button>
+    <nav id="mainNav">
+      <a class="nav-link active" href="#home">الرئيسية</a>
+      <a class="nav-link" href="#library">مكتبة الألعاب</a>
+      <a class="nav-link" href="#about">عن هانتر</a>
+      <button class="nav-admin" id="openAdmin">لوحة التحكم <span>＋</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="pulse"></span> YOUR WORLD. YOUR GAMES.</p>
+        <h1>WELCOME TO<br><span class="gradient-text">XHUNTER007</span></h1>
+        <p class="hero-desc">عالمك الخاص للألعاب — اكتشف مجموعتك، رتّب ألعابك، وخلي كل حاجة في مكان واحد.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#library">استكشف المكتبة <span>←</span></a>
+          <button class="btn btn-ghost" id="heroAdmin">إدارة الألعاب</button>
+        </div>
+        <div class="hero-stats">
+          <div><strong id="gameCount">0</strong><span>لعبة في المكتبة</span></div>
+          <i></i>
+          <div><strong>007</strong><span>هوية هانتر</span></div>
+        </div>
+      </div>
+      <div class="hero-art" aria-label="تصميم غروب نيون">
+        <div class="sun"></div><div class="horizon"></div>
+        <div class="palm palm-left">♣</div><div class="palm palm-right">♣</div>
+        <div class="city city-back"></div><div class="city city-front"></div>
+        <div class="hero-stamp">HUNTER<br><b>007</b></div>
+        <div class="art-caption">VICE CITY VIBES <span>EST. 2026</span></div>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="شريط ترحيبي"><div>XHUNTER007 <b>✦</b> GAME LIBRARY <b>✦</b> PLAY YOUR WAY <b>✦</b> XHUNTER007 <b>✦</b> GAME LIBRARY <b>✦</b></div></section>
+
+    <section class="section library-section" id="library">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE COLLECTION</p><h2>مكتبة <span class="pink">الألعاب</span></h2><p class="muted">كل ألعابك في مكان واحد، بتنسيق من اختيارك.</p></div>
+        <button class="btn btn-primary add-top" id="addGameTop">＋ أضف لعبة</button>
+      </div>
+      <div class="library-tools">
+        <label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="ابحث عن لعبة بالاسم..."></label>
+        <select id="platformFilter" aria-label="تصفية حسب المنصة"><option value="">كل المنصات</option><option>PS4</option><option>PS5</option><option>PC</option><option>Xbox</option><option>Other</option></select>
+        <select id="genreFilter" aria-label="تصفية حسب التصنيف"><option value="">كل التصنيفات</option><option>Action</option><option>Adventure</option><option>Sports</option><option>Racing</option><option>Open World</option><option>Other</option></select>
+      </div>
+      <div id="gamesGrid" class="games-grid"></div>
+      <div id="emptyState" class="empty-state"><div class="empty-icon">✦</div><h3>المكتبة لسه فاضية</h3><p>ابدأ بإضافة أول لعبة من لوحة التحكم.</p><button class="btn btn-primary" id="emptyAdd">إضافة أول لعبة</button></div>
+    </section>
+
+    <section class="about section" id="about">
+      <div class="about-card"><div class="about-symbol">X<span>007</span></div><div><p class="eyebrow">THE OWNER</p><h2>هذا عالم <span class="cyan">هانتر</span></h2><p class="muted">XHUNTER007 — مكتبة ألعاب شخصية بتصميم مستوحى من أجواء Vice City والثمانينات، من تنظيمك وإدارتك.</p></div></div>
+      <div class="signature">DESIGNED BY <b>XHUNTER007</b></div>
+    </section>
+  </main>
+
+  <footer><span>© 2026 XHUNTER007</span><span>BUILT FOR THE GAME</span></footer>
+
+  <dialog id="adminDialog" class="modal">
+    <form method="dialog" class="modal-head"><div><p class="eyebrow">HUNTER CONTROL</p><h2>لوحة التحكم</h2></div><button class="close-btn" aria-label="إغلاق">×</button></form>
+    <div class="admin-tabs"><button class="tab active" data-tab="manage">إدارة الألعاب</button><button class="tab" data-tab="backup">نسخ احتياطي</button></div>
+    <section id="managePanel">
+      <form id="gameForm" class="game-form">
+        <input type="hidden" id="editId">
+        <div class="form-grid">
+          <label>اسم اللعبة *<input id="gameName" required maxlength="70" placeholder="مثال: GTA V"></label>
+          <label>المنصة<select id="gamePlatform"><option>PS4</option><option>PS5</option><option>PC</option><option>Xbox</option><option>Other</option></select></label>
+          <label>التصنيف<select id="gameGenre"><option>Action</option><option>Adventure</option><option>Sports</option><option>Racing</option><option>Open World</option><option>Other</option></select></label>
+          <label>رابط صورة الغلاف<input id="gameImage" type="url" placeholder="https://..."></label>
+          <label class="full">وصف مختصر<textarea id="gameDescription" rows="2" maxlength="240" placeholder="اكتب ملاحظة عن اللعبة..."></textarea></label>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary" type="submit" id="saveGame">حفظ اللعبة</button><button class="btn btn-ghost" type="button" id="cancelEdit" hidden>إلغاء التعديل</button></div>
+      </form>
+      <div class="admin-list-head"><h3>الألعاب المسجلة</h3><span id="adminCount">0 لعبة</span></div>
+      <div id="adminList" class="admin-list"></div>
+    </section>
+    <section id="backupPanel" hidden class="backup-panel"><h3>بيانات مكتبتك</h3><p class="muted">احفظ نسخة JSON من ألعابك أو استورد نسخة سابقة. البيانات محفوظة في المتصفح الحالي.</p><div class="form-actions"><button class="btn btn-primary" id="exportBtn" type="button">تصدير نسخة احتياطية</button><label class="btn btn-ghost import-label">استيراد نسخة<input type="file" id="importFile" accept="application/json"></label></div><p class="small-note">ملاحظة: Local Storage لا يزامن البيانات تلقائياً بين الأجهزة أو المتصفحات.</p></section>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
