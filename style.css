@@ -40,3 +40,8 @@
 
 /* XHUNTER007 custom gaming background */
 body{background-color:var(--bg);background-image:linear-gradient(rgba(16,13,24,.78),rgba(16,13,24,.86)),url('./assets/download.jpg');background-size:cover;background-position:center;background-attachment:fixed;background-repeat:no-repeat}
+
+
+/* XHUNTER007 Hisoka + Hunter hero artwork */
+.hero-art{background:linear-gradient(rgba(12,8,20,.10),rgba(12,8,20,.10)),url('./assets/a3d6ea05-4ffc-4e43-a462-de0756828619.png') center/cover no-repeat}
+.hero-art>*,.hero-art:before{display:none}
