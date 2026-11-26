@@ -15,7 +15,14 @@
     ].map((x,i)=>({id:"ps5-"+i,name:x[0],platform:"PS5",genre:x[1],image:"",link:"",description:""}))
   ];
   const coverIds = {"Grand Theft Auto V":271590,"Red Dead Redemption 2":1174180,"God of War":1593500,"Marvel's Spider-Man":1817070,"The Last of Us Part II":2531310,"Uncharted 4: A Thief's End":1659420,"Ghost of Tsushima":2215430,"Horizon Zero Dawn":1151640,"Mortal Kombat 11":976310,"EA SPORTS FC 26":3405690,"Marvel's Spider-Man 2":2651280,"God of War Ragnarök":2322010,"Horizon Forbidden West":2420110,"Astro Bot":0,"Gran Turismo 7":0,"NBA 2K26":3472040,"Call of Duty: Black Ops 7":1938090,"Hogwarts Legacy":990080};
-  const coverOverrides = {"Astro Bot":"https://images.launchbox-app.com/r2_ac676906-f8de-483c-946d-78eedb3c7999.jpg","Gran Turismo 7":"https://images.launchbox-app.com/4211ae53-61d4-4377-808f-e92d878ca5ed.jpg","Ghost of Yōtei":"https://images.launchbox-app.com/0eca21b8-50a9-4918-81d9-f8003e27df20.png","EA SPORTS FC 26|PS4":"https://store974.com/cdn/shop/files/fcps41.png?crop=center&height=1100&v=1758783957&width=1100","EA SPORTS FC 26|PS5":"https://videogamesplus.ca/cdn/shop/files/FC26ps53DPFTfront_us_ca_RGB_1024x1024.jpg?v=1752690592","NBA 2K26|PS5":"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/7da74f3b-bdfa-4372-af9c-322aa3ece311.png"};
+  const coverOverrides = {
+    "Bloodborne":"https://i.pinimg.com/originals/a2/8b/eb/a28bebcfc2a04d792bc4fc607f41206c.jpg",
+    "inFAMOUS Second Son":"https://now.estarland.com/images/products/85/43085/126979.jpg",
+    "Ratchet & Clank":"https://i.ebayimg.com/images/g/tI8AAOSwF0VcOI~t/s-l1600.png",
+    "Until Dawn":"https://i5.walmartimages.com/seo/Until-Dawn-Sony-PlayStation-4-711719039433_86e1301e-50ed-4e4a-8c58-140510da5158_1.137cbf1c09a3e8d6038a59360d37bf2f.jpeg",
+    "Demon's Souls":"https://live.staticflickr.com/65535/50565184861_71c81f29e9_c.jpg",
+    "Alan Wake 2":"https://pixelgames.io/cdn/shop/files/1_672f2f65-c2c0-4801-acc0-e422a2d9ae56.webp?v=1738179762&width=1946",
+"Astro Bot":"https://images.launchbox-app.com/r2_ac676906-f8de-483c-946d-78eedb3c7999.jpg","Gran Turismo 7":"https://images.launchbox-app.com/4211ae53-61d4-4377-808f-e92d878ca5ed.jpg","Ghost of Yōtei":"https://images.launchbox-app.com/0eca21b8-50a9-4918-81d9-f8003e27df20.png","EA SPORTS FC 26|PS4":"https://store974.com/cdn/shop/files/fcps41.png?crop=center&height=1100&v=1758783957&width=1100","EA SPORTS FC 26|PS5":"https://videogamesplus.ca/cdn/shop/files/FC26ps53DPFTfront_us_ca_RGB_1024x1024.jpg?v=1752690592","NBA 2K26|PS5":"https://pisces.bbystatic.com/image2/BestBuy_US/images/products/7da74f3b-bdfa-4372-af9c-322aa3ece311.png"};
   const coverUrl = id => id ? `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${id}/library_600x900.jpg` : "";
   Object.assign(coverIds,{
     "Sekiro: Shadows Die Twice":814380,"Dark Souls III":374320,"Elden Ring":1245620,"Persona 5 Royal":1687950,
