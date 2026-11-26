@@ -36,3 +36,7 @@
 .game-link-icon.youtube-icon:hover{box-shadow:0 0 15px #ff4c7255;border-color:#ff557b}
 .game-link-remove{position:absolute;top:-6px;right:-6px;width:19px;height:19px;padding:0;border:1px solid #ff4ca7;background:#241321;color:white;border-radius:50%;cursor:pointer;line-height:16px;font-size:12px}
 @media(max-width:650px){.game-link-entry{grid-template-columns:1fr}.game-link-entry .btn{width:100%}.game-links-section{padding:13px}.game-link-icon{width:60px;min-height:58px}}
+
+
+/* XHUNTER007 custom gaming background */
+body{background-color:var(--bg);background-image:linear-gradient(rgba(16,13,24,.78),rgba(16,13,24,.86)),url('./assets/download.jpg');background-size:cover;background-position:center;background-attachment:fixed;background-repeat:no-repeat}
