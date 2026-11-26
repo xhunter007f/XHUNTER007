@@ -16,6 +16,8 @@
   ];
   const coverIds = {"Grand Theft Auto V":271590,"Red Dead Redemption 2":1174180,"God of War":1593500,"Marvel's Spider-Man":1817070,"The Last of Us Part II":2531310,"Uncharted 4: A Thief's End":1659420,"Ghost of Tsushima":2215430,"Horizon Zero Dawn":1151640,"Mortal Kombat 11":976310,"EA SPORTS FC 26":3405690,"Marvel's Spider-Man 2":2651280,"God of War Ragnarök":2322010,"Horizon Forbidden West":2420110,"Astro Bot":0,"Gran Turismo 7":0,"NBA 2K26":3472040,"Call of Duty: Black Ops 7":1938090,"Hogwarts Legacy":990080};
   const coverOverrides = {
+    "Rise of the Ronin|PS5":"https://image.smythstoys.com/original/800/desktop/234095.jpg",
+    "F1 25|PS5":"https://gameline.ph/cdn/shop/files/w_be5c7770-2cbf-4803-8295-90ac21cd0deb_700x700.png?v=1773644010",
     "Bloodborne":"https://i.pinimg.com/originals/a2/8b/eb/a28bebcfc2a04d792bc4fc607f41206c.jpg",
     "inFAMOUS Second Son":"https://now.estarland.com/images/products/85/43085/126979.jpg",
     "Ratchet & Clank":"https://i.ebayimg.com/images/g/tI8AAOSwF0VcOI~t/s-l1600.png",
