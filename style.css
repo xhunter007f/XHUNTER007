@@ -62,3 +62,33 @@ body{background-color:var(--bg);background-image:linear-gradient(rgba(16,13,24,.
 .category-btn.active{color:#160e20;border:1px solid #fff;background:linear-gradient(105deg,#ff4ca7 0%,#d86bdf 52%,#42e8f5 100%);text-shadow:0 1px 1px rgba(255,255,255,.45);box-shadow:0 0 7px #fff,0 0 16px rgba(255,76,167,.85),0 0 30px rgba(66,232,245,.5),inset 0 0 12px rgba(255,255,255,.45)}
 .category-btn.active::before{display:none}
 @media(max-width:650px){.category-buttons{gap:9px;padding:12px 10px}.category-btn{flex:1 0 auto;min-height:40px;padding:8px 12px;font-size:9px}}
+
+
+/* Final neon pass: keep category filters neon, never plain white */
+#categoryButtons .category-btn{
+  color:#8ff8ff !important;
+  background:linear-gradient(135deg,#101a2b 0%,#21102b 100%) !important;
+  border:1px solid #42e8f5 !important;
+  text-shadow:0 0 6px #42e8f5,0 0 14px #42e8f588 !important;
+  box-shadow:inset 0 0 12px #42e8f522,0 0 7px #42e8f588,0 0 16px #42e8f533 !important;
+}
+#categoryButtons .category-btn:nth-child(3n+2){
+  border-color:#ff4ca7 !important;
+  color:#ff9bd0 !important;
+  text-shadow:0 0 7px #ff4ca7,0 0 15px #ff4ca788 !important;
+  box-shadow:inset 0 0 12px #ff4ca722,0 0 7px #ff4ca777,0 0 16px #ff4ca733 !important;
+}
+#categoryButtons .category-btn:hover{
+  color:#fff !important;
+  border-color:#fff !important;
+  background:linear-gradient(120deg,#ff4ca7,#9560ff,#42e8f5) !important;
+  text-shadow:0 0 8px #fff,0 0 18px #ff4ca7 !important;
+  box-shadow:0 0 8px #fff,0 0 20px #ff4ca7,0 0 30px #42e8f5 !important;
+}
+#categoryButtons .category-btn.active{
+  color:#fff !important;
+  border:1px solid #ff8ac7 !important;
+  background:linear-gradient(110deg,#7b174f 0%,#55206f 52%,#075d70 100%) !important;
+  text-shadow:0 0 7px #fff,0 0 16px #ff4ca7 !important;
+  box-shadow:inset 0 0 14px #ffffff20,0 0 8px #ff4ca7,0 0 20px #ff4ca7aa,0 0 30px #42e8f566 !important;
+}
