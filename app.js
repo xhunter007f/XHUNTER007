@@ -149,7 +149,7 @@
       ["Sniper Elite 4","Shooter",2],["Sniper Elite 5","Shooter",4],["No Man's Sky","Adventure",4],["ARK: Survival Evolved","Survival",4],
       ["Conan Exiles","Survival",4],["Path of Exile","RPG",6],["The Elder Scrolls Online","RPG",4],
       ["The Forest","Horror",4],["Generation Zero","Shooter",4],["Risk of Rain 2","Action",4],["Dead Island 2","Action",3],
-      ["The Division 2","Shooter",4],["Payday 3","Shooter",4],["Elden Ring","RPG",3],["Fallout 76","RPG",4],
+      ["Payday 3","Shooter",4],["Elden Ring","RPG",3],["Fallout 76","RPG",4],
       ["Genshin Impact","RPG",4],["Call of Duty: Modern Warfare III","Shooter",4]
     ].map((x,i)=>({id:"online-coop-ps4-"+i,name:x[0],platform:"PS4",genre:x[1],coop:true,onlineCoop:true,image:"",link:"",description:"Online co-op · up to "+x[2]+" players · each player needs their own console and internet. Check game mode and PS Plus requirements."})),
     ...[
