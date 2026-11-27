@@ -48,6 +48,22 @@
     "The Crew Motorfest":2698940,"F1 25":3059520,"Remnant II":1282100,"Granblue Fantasy: Relink":881020,
     "Avatar: Frontiers of Pandora":2840770,"Warhammer 40,000: Space Marine 2":2183900
   });
+  Object.assign(coverIds,{
+    "It Takes Two":1426210,"A Way Out":1222700,"Unravel Two":1225570,"Sackboy: A Big Adventure":1599660,
+    "LittleBigPlanet 3":307230,"Rayman Legends":242550,"Overcooked!":448510,"Overcooked! 2":728880,
+    "Moving Out":996770,"Moving Out 2":1641700,"Trine 4: The Nightmare Prince":690640,"Trine 5: A Clockwork Conspiracy":1436700,
+    "Stardew Valley":413150,"Don't Starve Together":322330,"Terraria":105600,"Divinity: Original Sin 2":435150,
+    "Borderlands 3":397540,"Resident Evil 5":21690,"Resident Evil 6":221040,"Resident Evil: Revelations 2":287290,
+    "Streets of Rage 4":985890,"Teenage Mutant Ninja Turtles: Shredder's Revenge":1361510,"Castle Crashers Remastered":204360,
+    "Broforce":274190,"Magicka 2":238370,"Guacamelee! 2":534550,"Cat Quest II":914710,"Children of Morta":330020,
+    "Outward: Definitive Edition":794260,"The Ascent":979690,"Unrailed!":1016920,"Human: Fall Flat":477160,
+    "Keep Talking and Nobody Explodes":341800,"Spelunky 2":418530,"Enter the Gungeon":311690,
+    "Lovers in a Dangerous Spacetime":252110,"Guns, Gore & Cannoli 2":525510,
+    "Guacamelee! Super Turbo Championship Edition":275390,"Minecraft Dungeons":1672970,
+    "Split Fiction":2001120,"Tiny Tina's Wonderlands":1286680,"Cult of the Lamb":1313140,
+    "Vampire Survivors":1794680,"Nobody Saves the World":1432050,"PlateUp!":1599600,
+    "Ship of Fools":1803900,"Ember Knights":1135230,"The Binding of Isaac: Rebirth":250900
+  });
   const expansionGames = [
     ...[
       ["Bloodborne","Action"],["Sekiro: Shadows Die Twice","Action"],["Dark Souls III","Action"],["Elden Ring","Action"],
@@ -98,12 +114,12 @@
       ["The Ascent","Shooter",4,"Same Screen"],["Unrailed!","Puzzle",4,"Same Screen"],
       ["Human: Fall Flat","Puzzle",2,"Same Screen"],["Keep Talking and Nobody Explodes","Puzzle",2,"Pass-and-Play"],
       ["Spelunky 2","Adventure",4,"Same Screen"],["Enter the Gungeon","Action",2,"Same Screen"],
-      ["Lovers in a Dangerous Spacetime","Action",4,"Same Screen"],["Guns, Gore & Cannoli 2","Action",4,"Same Screen"],
+      ["Guns, Gore & Cannoli 2","Action",4,"Same Screen"],
       ["LEGO Marvel Super Heroes 2","Adventure",2,"Same Screen"],["LEGO Star Wars: The Skywalker Saga","Adventure",2,"Same Screen"],
       ["LEGO DC Super-Villains","Adventure",2,"Same Screen"],["LEGO Jurassic World","Adventure",2,"Same Screen"],
       ["Minecraft Dungeons","Action",4,"Same Screen"],["Rayman Origins","Adventure",4,"Same Screen"],
       ["Guacamelee! Super Turbo Championship Edition","Action",2,"Same Screen"],["Scott Pilgrim vs. The World: The Game","Action",4,"Same Screen"],
-      ["TMNT: Mutants in Manhattan","Action",4,"Online only"],["The Dark Pictures: Man of Medan","Horror",2,"Shared Story / Movie Night"]
+      ["Wobbly Life","Adventure",4,"Same Screen"],["The Binding of Isaac: Rebirth","Action",4,"Same Screen"]
     ].map((x,i)=>({id:"coop-ps4-"+i,name:x[0],platform:"PS4",genre:x[1],coop:true,image:"",link:"",description:"Local co-op: up to "+x[2]+" players · "+x[3]+"."})),
     ...[
       ["Split Fiction","Adventure",2,"Split Screen"],["It Takes Two","Adventure",2,"Split Screen"],
@@ -117,8 +133,7 @@
       ["LEGO Star Wars: The Skywalker Saga","Adventure",2,"Same Screen"],["Vampire Survivors","Action",4,"Same Screen"],
       ["Nobody Saves the World","Action",2,"Same Screen"],["PlateUp!","Puzzle",4,"Same Screen"],
       ["Ship of Fools","Action",2,"Same Screen"],["Ember Knights","Action",4,"Same Screen"],
-      ["Moving Out 2","Puzzle",4,"Same Screen"],["Human: Fall Flat","Puzzle",2,"Same Screen"],
-      ["Untitled Goose Game","Puzzle",2,"Same Screen"]
+      ["Moving Out 2","Puzzle",4,"Same Screen"],["Human: Fall Flat","Puzzle",2,"Same Screen"]
     ].map((x,i)=>({id:"coop-ps5-"+i,name:x[0],platform:"PS5",genre:x[1],coop:true,image:"",link:"",description:"Local co-op: up to "+x[2]+" players · "+x[3]+"."}))
   ];
 
