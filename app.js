@@ -97,22 +97,41 @@
   function save(){ localStorage.setItem(KEY,JSON.stringify(games)); render(); }
   function esc(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
   function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2400);}
+  const CATEGORIES = ["Action","Adventure","Horror","RPG","Shooter","Racing","Sports","Fighting","Puzzle","Open World","Co-op"];
+  let activeCategory = "";
+  function getCategory(game){
+    const n=(game.name||"").toLowerCase();
+    if(/resident evil|silent hill|outlast|until dawn|alan wake|dead space|the evil within|amnesia|visage/.test(n)) return "Horror";
+    if(/persona|final fantasy|witcher|baldur|diablo|dragon.s dogma|metaphor|granblue|like a dragon|nier/.test(n)) return "RPG";
+    if(/call of duty|battlefield|doom|far cry|hell.?divers|remnant|warhammer|suicide squad/.test(n)) return "Shooter";
+    if(/tekken|street fighter|mortal kombat/.test(n)) return "Fighting";
+    if(/crash bandicoot|spyro|cuphead|hollow knight|celeste|astro bot|prince of persia/.test(n)) return "Puzzle";
+    if(/gran turismo|f1 25|the crew motorfest/.test(n)) return "Racing";
+    if(/fc 26|nba 2k/.test(n)) return "Sports";
+    if(/grand theft auto|red dead redemption|cyberpunk|watch dogs|mafia|horizon|assassin.s creed|avatar: frontiers/.test(n)) return "Open World";
+    if(/elden ring|dark souls|bloodborne|sekiro|demon.s souls|lies of p|lords of the fallen|wo long|black myth|stellar blade|god of war|spider-man|ghost of tsushima|ghost of yōtei|devil may cry|ratchet|infamous|middle-earth|monster hunter|returnal|armored core/.test(n)) return "Action";
+    return ["Action","Adventure","Horror","RPG","Shooter","Racing","Sports","Fighting","Puzzle","Open World","Co-op"].includes(game.genre) ? game.genre : "Adventure";
+  }
+  const categoryButtons = $("categoryButtons");
+  categoryButtons.innerHTML = `<button class="category-btn active" type="button" data-category="">ALL GAMES</button>${CATEGORIES.map(c=>`<button class="category-btn" type="button" data-category="${c}">${c.toUpperCase()}</button>`).join("")}`;
+  categoryButtons.addEventListener("click",e=>{const b=e.target.closest(".category-btn");if(!b)return;activeCategory=b.dataset.category;render();});
   function render(){
     $("gameCount").textContent=games.length;
     $("adminCount").textContent=`${games.length} لعبة`;
-    const q=$("searchInput").value.trim().toLowerCase(), p=$("platformFilter").value, g=$("genreFilter").value;
-    const filtered=games.filter(x=>(x.name||"").toLowerCase().includes(q)&&(!p||x.platform===p)&&(!g||x.genre===g));
-    $("gamesGrid").innerHTML=filtered.map(x=>`<article class="game-card game-card-clickable" data-details="${esc(x.id)}" tabindex="0" role="button" aria-label="عرض تفاصيل ${esc(x.name)}"><div class="game-cover">${x.image?`<img src="${esc(x.image)}" alt="${esc(x.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false">`:""}<span class="cover-placeholder" ${x.image?'hidden':''}>XH007</span><span class="platform-tag">${esc(x.platform)}</span></div><div class="game-info"><h3>${esc(x.name)}</h3><div class="game-meta"><span>${esc(x.genre)}</span><span>✦</span><span>اضغط للتفاصيل</span></div></div></article>`).join("");
+    const q=$("searchInput").value.trim().toLowerCase(), p=$("platformFilter").value;
+    const filtered=games.filter(x=>(x.name||"").toLowerCase().includes(q)&&(!p||x.platform===p)&&(!activeCategory||getCategory(x)===activeCategory));
+    document.querySelectorAll(".category-btn").forEach(b=>b.classList.toggle("active",b.dataset.category===activeCategory));
+    $("gamesGrid").innerHTML=filtered.map(x=>`<article class="game-card game-card-clickable" data-details="${esc(x.id)}" tabindex="0" role="button" aria-label="عرض تفاصيل ${esc(x.name)}"><div class="game-cover">${x.image?`<img src="${esc(x.image)}" alt="${esc(x.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false">`:""}<span class="cover-placeholder" ${x.image?'hidden':''}>XH007</span><span class="platform-tag">${esc(x.platform)}</span></div><div class="game-info"><h3>${esc(x.name)}</h3><div class="game-meta"><span>${esc(getCategory(x))}</span><span>✦</span><span>اضغط للتفاصيل</span></div></div></article>`).join("");
     $("emptyState").hidden=filtered.length!==0;
     $("gamesGrid").style.display=filtered.length?"grid":"none";
-    $("adminList").innerHTML=games.length?games.map(x=>`<div class="admin-row"><img class="admin-thumb" src="${esc(x.image||"")}" onerror="this.style.visibility='hidden'" alt=""><div class="admin-row-info"><b>${esc(x.name)}</b><small>${esc(x.platform)} · ${esc(x.genre)}</small></div><button class="mini-btn" data-edit="${x.id}">تعديل</button><button class="mini-btn delete" data-delete="${x.id}">حذف</button></div>`).join(""):`<p class="muted">لا توجد ألعاب مضافة حتى الآن.</p>`;
+    $("adminList").innerHTML=games.length?games.map(x=>`<div class="admin-row"><img class="admin-thumb" src="${esc(x.image||"")}" onerror="this.style.visibility='hidden'" alt=""><div class="admin-row-info"><b>${esc(x.name)}</b><small>${esc(x.platform)} · ${esc(getCategory(x))}</small></div><button class="mini-btn" data-edit="${x.id}">تعديل</button><button class="mini-btn delete" data-delete="${x.id}">حذف</button></div>`).join(""):`<p class="muted">لا توجد ألعاب مضافة حتى الآن.</p>`;
   }
   function openAdmin(){dialog.showModal();}
   function resetForm(){ $("gameForm").reset();$("editId").value="";$("saveGame").textContent="حفظ اللعبة";$("cancelEdit").hidden=true; }
-  function startEdit(id){const x=games.find(g=>g.id===id);if(!x)return;$("editId").value=x.id;$("gameName").value=x.name;$("gamePlatform").value=x.platform;$("gameGenre").value=x.genre;$("gameImage").value=x.image||"";$("gameLink").value=x.link||"";$("gameDescription").value=x.description||"";$("saveGame").textContent="حفظ التعديلات";$("cancelEdit").hidden=false;$("gameName").focus();$("managePanel").scrollIntoView({behavior:"smooth"});}
+  function startEdit(id){const x=games.find(g=>g.id===id);if(!x)return;$("editId").value=x.id;$("gameName").value=x.name;$("gamePlatform").value=x.platform;$("gameGenre").value=getCategory(x);$("gameImage").value=x.image||"";$("gameLink").value=x.link||"";$("gameDescription").value=x.description||"";$("saveGame").textContent="حفظ التعديلات";$("cancelEdit").hidden=false;$("gameName").focus();$("managePanel").scrollIntoView({behavior:"smooth"});}
   const detailsDialog=$("detailsDialog");
   let activeDetailsId=null;
-  function showDetails(id){const x=games.find(g=>String(g.id)===String(id));if(!x)return;activeDetailsId=x.id;$("detailsTitle").textContent=x.name;const cover=$("detailsCover");cover.src=x.image||"";cover.hidden=!x.image;$("detailsPlatform").textContent=x.platform;$("detailsGenre").textContent=x.genre||"غير محدد";$("detailsDescription").textContent=x.description||"لا يوجد وصف مضاف لهذه اللعبة.";const link=$("detailsLink");link.hidden=false;link.href=`game.html?id=${encodeURIComponent(x.id)}`;link.textContent="فتح صفحة اللعبة ↗";$("detailsNoLink").hidden=true;detailsDialog.showModal();}
+  function showDetails(id){const x=games.find(g=>String(g.id)===String(id));if(!x)return;activeDetailsId=x.id;$("detailsTitle").textContent=x.name;const cover=$("detailsCover");cover.src=x.image||"";cover.hidden=!x.image;$("detailsPlatform").textContent=x.platform;$("detailsGenre").textContent=getCategory(x);$("detailsDescription").textContent=x.description||"لا يوجد وصف مضاف لهذه اللعبة.";const link=$("detailsLink");link.hidden=false;link.href=`game.html?id=${encodeURIComponent(x.id)}`;link.textContent="فتح صفحة اللعبة ↗";$("detailsNoLink").hidden=true;detailsDialog.showModal();}
   $("gamesGrid").addEventListener("click",e=>{const card=e.target.closest("[data-details]");if(card)showDetails(card.dataset.details);});
   $("gamesGrid").addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches("[data-details]")){e.preventDefault();showDetails(e.target.dataset.details);}});
   $("closeDetails").addEventListener("click",()=>detailsDialog.close());
@@ -120,7 +139,7 @@
   $("gameForm").addEventListener("submit",e=>{e.preventDefault();const id=$("editId").value;const item={id:id||String(Date.now()),name:$("gameName").value.trim(),platform:$("gamePlatform").value,genre:$("gameGenre").value,image:$("gameImage").value.trim(),link:$("gameLink").value.trim(),description:$("gameDescription").value.trim()};if(!item.name)return;if(id){games=games.map(x=>x.id===id?item:x);toast("تم تحديث اللعبة");}else{games.unshift(item);toast("تمت إضافة اللعبة");}save();resetForm();});
   $("cancelEdit").addEventListener("click",resetForm);
   $("adminList").addEventListener("click",e=>{const edit=e.target.dataset.edit,del=e.target.dataset.delete;if(edit)startEdit(edit);if(del&&confirm("متأكد من حذف اللعبة؟")){games=games.filter(x=>x.id!==del);save();toast("تم حذف اللعبة");}});
-  ["searchInput","platformFilter","genreFilter"].forEach(id=>$(id).addEventListener(id==="searchInput"?"input":"change",render));
+  ["searchInput","platformFilter"].forEach(id=>$(id).addEventListener(id==="searchInput"?"input":"change",render));
   document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t===b));$("managePanel").hidden=b.dataset.tab!=="manage";$("backupPanel").hidden=b.dataset.tab!=="backup";}));
   $("exportBtn").addEventListener("click",()=>{const blob=new Blob([JSON.stringify(games,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="XHUNTER007-games-backup.json";a.click();URL.revokeObjectURL(a.href);toast("تم تجهيز النسخة الاحتياطية");});
   $("importFile").addEventListener("change",async e=>{const file=e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());if(!Array.isArray(data)||!data.every(x=>x&&x.name))throw Error();if(confirm(`استيراد ${data.length} لعبة؟ سيتم استبدال المكتبة الحالية.`)){games=data.map(x=>({id:String(x.id||Date.now()+Math.random()),name:String(x.name),platform:["PS4","PS5"].includes(x.platform)?x.platform:"PS4",genre:x.genre||"Other",image:x.image||"",link:x.link||"",description:x.description||""}));save();toast("تم استيراد المكتبة");}}catch{toast("ملف غير صالح");}e.target.value="";});
