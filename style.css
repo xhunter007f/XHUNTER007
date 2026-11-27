@@ -52,3 +52,13 @@ body{background-color:var(--bg);background-image:linear-gradient(rgba(16,13,24,.
 .category-btn:hover{transform:translateY(-2px);border-color:var(--pink);color:#fff;box-shadow:0 5px 18px #ff4ca722}
 .category-btn.active{background:linear-gradient(100deg,var(--pink),#b56bdf 55%,var(--cyan));border-color:transparent;color:#160e20;box-shadow:0 5px 20px #ff4ca733}
 @media(max-width:650px){.category-buttons{gap:7px;margin-bottom:20px}.category-btn{padding:8px 10px;font-size:9px;flex:1 0 auto}}
+
+/* Neon arcade category buttons - stronger glow */
+.category-buttons{display:flex;flex-wrap:wrap;gap:12px;margin:4px 0 30px;padding:14px 15px;background:rgba(10,8,19,.72);border:1px solid rgba(66,232,245,.22);box-shadow:inset 0 0 24px rgba(66,232,245,.06),0 8px 28px rgba(0,0,0,.28)}
+.category-btn{position:relative;isolation:isolate;overflow:hidden;min-height:42px;padding:9px 17px;border:1px solid rgba(66,232,245,.72);border-radius:6px;background:linear-gradient(135deg,rgba(19,24,43,.96),rgba(40,17,48,.94));color:#bdfaff;text-shadow:0 0 8px rgba(66,232,245,.65);font:800 10px Orbitron,sans-serif;letter-spacing:.65px;cursor:pointer;box-shadow:inset 0 0 13px rgba(66,232,245,.12),0 0 8px rgba(66,232,245,.22);transition:all .2s ease}
+.category-btn::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 15%,rgba(255,76,167,.2),transparent 80%);opacity:.5;transition:opacity .2s}
+.category-btn:hover{transform:translateY(-3px);border-color:var(--pink);color:#fff;text-shadow:0 0 9px #fff,0 0 18px var(--pink);box-shadow:inset 0 0 15px rgba(255,76,167,.18),0 0 9px rgba(255,76,167,.55),0 0 22px rgba(255,76,167,.22)}
+.category-btn:hover::before{opacity:1}
+.category-btn.active{color:#160e20;border:1px solid #fff;background:linear-gradient(105deg,#ff4ca7 0%,#d86bdf 52%,#42e8f5 100%);text-shadow:0 1px 1px rgba(255,255,255,.45);box-shadow:0 0 7px #fff,0 0 16px rgba(255,76,167,.85),0 0 30px rgba(66,232,245,.5),inset 0 0 12px rgba(255,255,255,.45)}
+.category-btn.active::before{display:none}
+@media(max-width:650px){.category-buttons{gap:9px;padding:12px 10px}.category-btn{flex:1 0 auto;min-height:40px;padding:8px 12px;font-size:9px}}
