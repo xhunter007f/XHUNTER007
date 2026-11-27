@@ -45,3 +45,10 @@ body{background-color:var(--bg);background-image:linear-gradient(rgba(16,13,24,.
 /* XHUNTER007 Hisoka + Hunter hero artwork */
 .hero-art{background:linear-gradient(rgba(12,8,20,.10),rgba(12,8,20,.10)),url('./assets/a3d6ea05-4ffc-4e43-a462-de0756828619.png') center/cover no-repeat}
 .hero-art>*,.hero-art:before{display:none}
+
+/* XHUNTER007 instant category filter buttons */
+.category-buttons{display:flex;flex-wrap:wrap;gap:10px;margin:-7px 0 26px}
+.category-btn{border:1px solid #42e8f566;background:linear-gradient(145deg,#21182e,#15111e);color:#c9bfd2;padding:9px 15px;border-radius:5px;font:700 10px Orbitron,sans-serif;letter-spacing:.45px;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s,color .18s}
+.category-btn:hover{transform:translateY(-2px);border-color:var(--pink);color:#fff;box-shadow:0 5px 18px #ff4ca722}
+.category-btn.active{background:linear-gradient(100deg,var(--pink),#b56bdf 55%,var(--cyan));border-color:transparent;color:#160e20;box-shadow:0 5px 20px #ff4ca733}
+@media(max-width:650px){.category-buttons{gap:7px;margin-bottom:20px}.category-btn{padding:8px 10px;font-size:9px;flex:1 0 auto}}
