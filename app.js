@@ -142,6 +142,7 @@
   const coverFor = (name,platform) => coverOverrides[`${name}|${platform}`] || coverOverrides[name] || coverUrl(coverIds[name]) || "";
   expansionGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
   starterGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
+  coopGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
   let games = loadGames();
   function loadGames(){
     try {
