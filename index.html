@@ -55,8 +55,8 @@
       <div class="library-tools">
         <label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="ابحث عن لعبة بالاسم..."></label>
         <select id="platformFilter" aria-label="تصفية حسب المنصة"><option value="">كل المنصات</option><option>PS4</option><option>PS5</option></select>
-        <select id="genreFilter" aria-label="تصفية حسب التصنيف"><option value="">كل التصنيفات</option><option>Action</option><option>Adventure</option><option>Sports</option><option>Racing</option><option>Open World</option><option>Other</option></select>
       </div>
+      <div id="categoryButtons" class="category-buttons" aria-label="تصنيفات الألعاب"></div>
       <div id="gamesGrid" class="games-grid"></div>
       <div id="emptyState" class="empty-state"><div class="empty-icon">✦</div><h3>المكتبة لسه فاضية</h3><p>ابدأ بإضافة أول لعبة من لوحة التحكم.</p><button class="btn btn-primary" id="emptyAdd">إضافة أول لعبة</button></div>
     </section>
@@ -78,7 +78,7 @@
         <div class="form-grid">
           <label>اسم اللعبة *<input id="gameName" required maxlength="70" placeholder="مثال: GTA V"></label>
           <label>المنصة<select id="gamePlatform"><option>PS4</option><option>PS5</option></select></label>
-          <label>التصنيف<select id="gameGenre"><option>Action</option><option>Adventure</option><option>Sports</option><option>Racing</option><option>Open World</option><option>Other</option></select></label>
+          <label>التصنيف<select id="gameGenre"><option>Action</option><option>Adventure</option><option>Horror</option><option>RPG</option><option>Shooter</option><option>Racing</option><option>Sports</option><option>Fighting</option><option>Puzzle</option><option>Open World</option><option>Co-op</option></select></label>
           <label>رابط صورة الغلاف<input id="gameImage" type="url" placeholder="https://..."></label>
           <label>رابط اللعبة (اختياري)<input id="gameLink" type="url" placeholder="https://..."></label>
           <label class="full">وصف مختصر<textarea id="gameDescription" rows="2" maxlength="240" placeholder="اكتب ملاحظة عن اللعبة..."></textarea></label>
@@ -92,6 +92,6 @@
   </dialog>
   <dialog id="detailsDialog" class="modal details-modal"><div class="modal-head"><div><p class="eyebrow">XHUNTER007 GAME INFO</p><h2 id="detailsTitle">تفاصيل اللعبة</h2></div><button class="close-btn" id="closeDetails" aria-label="إغلاق">×</button></div><div class="details-content"><img id="detailsCover" class="details-cover" alt="غلاف اللعبة" hidden><div class="details-platform" id="detailsPlatform"></div><p id="detailsGenre" class="game-meta"></p><p id="detailsDescription" class="details-description"></p><a id="detailsLink" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer" hidden>فتح رابط اللعبة ↗</a><p id="detailsNoLink" class="muted">لم تتم إضافة رابط لهذه اللعبة بعد.</p></div></dialog>
   <div id="toast" class="toast" role="status"></div>
-  <script src="app.js?v=20261126-12"></script>
+  <script src="app.js?v=20261127-13"></script>
 </body>
 </html>
