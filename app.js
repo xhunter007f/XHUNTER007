@@ -62,7 +62,7 @@
     "Guacamelee! Super Turbo Championship Edition":275390,"Minecraft Dungeons":1672970,
     "Split Fiction":2001120,"Tiny Tina's Wonderlands":1286680,"Cult of the Lamb":1313140,
     "Vampire Survivors":1794680,"Nobody Saves the World":1432050,"PlateUp!":1599600,
-    "Ship of Fools":1803900,"Ember Knights":1135230,"The Binding of Isaac: Rebirth":250900
+    "Ship of Fools":1803900,"Ember Knights":1135230,"The Binding of Isaac: Rebirth":250900,"A Hat in Time":253230,"Farm Together":673950,"Brotato":1942280,"Goat Simulator 3":850190
   });
   const expansionGames = [
     ...[
@@ -103,7 +103,7 @@
       ["Trine 5: A Clockwork Conspiracy","Adventure",4,"Same Screen"],["Minecraft","Adventure",4,"Split Screen"],
       ["Stardew Valley","RPG",4,"Same Screen"],["Don't Starve Together","Survival",2,"Same Screen"],["Terraria","Adventure",2,"Split Screen"],
       ["Divinity: Original Sin 2","RPG",2,"Same Screen"],["Diablo III: Eternal Collection","RPG",4,"Same Screen"],
-      ["Borderlands: The Handsome Collection","Shooter",4,"Split Screen"],["Borderlands 3","Shooter",4,"Split Screen"],
+      ["Borderlands: The Handsome Collection","Shooter",4,"Split Screen"],["Borderlands 3","Shooter",2,"Split Screen"],
       ["Resident Evil 5","Horror",2,"Split Screen"],["Resident Evil 6","Horror",2,"Split Screen"],
       ["Resident Evil: Revelations 2","Horror",2,"Split Screen"],["Cuphead","Action",2,"Same Screen"],
       ["Streets of Rage 4","Action",4,"Same Screen"],["Teenage Mutant Ninja Turtles: Shredder's Revenge","Action",6,"Same Screen"],
@@ -119,7 +119,8 @@
       ["LEGO DC Super-Villains","Adventure",2,"Same Screen"],["LEGO Jurassic World","Adventure",2,"Same Screen"],
       ["Minecraft Dungeons","Action",4,"Same Screen"],["Rayman Origins","Adventure",4,"Same Screen"],
       ["Guacamelee! Super Turbo Championship Edition","Action",2,"Same Screen"],["Scott Pilgrim vs. The World: The Game","Action",4,"Same Screen"],
-      ["Wobbly Life","Adventure",4,"Same Screen"],["The Binding of Isaac: Rebirth","Action",4,"Same Screen"]
+      ["Wobbly Life","Adventure",4,"Same Screen"],["The Binding of Isaac: Rebirth","Action",4,"Same Screen"],
+      ["A Hat in Time","Adventure",2,"Same Screen"],["Farm Together","Adventure",2,"Split Screen"],["Brotato","Action",4,"Same Screen"]
     ].map((x,i)=>({id:"coop-ps4-"+i,name:x[0],platform:"PS4",genre:x[1],coop:true,image:"",link:"",description:"Local co-op: up to "+x[2]+" players · "+x[3]+"."})),
     ...[
       ["Split Fiction","Adventure",2,"Split Screen"],["It Takes Two","Adventure",2,"Split Screen"],
@@ -132,8 +133,8 @@
       ["Cat Quest III","RPG",2,"Same Screen"],["LEGO Horizon Adventures","Adventure",2,"Same Screen"],
       ["LEGO Star Wars: The Skywalker Saga","Adventure",2,"Same Screen"],["Vampire Survivors","Action",4,"Same Screen"],
       ["Nobody Saves the World","Action",2,"Same Screen"],["PlateUp!","Puzzle",4,"Same Screen"],
-      ["Ship of Fools","Action",2,"Same Screen"],["Ember Knights","Action",4,"Same Screen"],
-      ["Moving Out 2","Puzzle",4,"Same Screen"],["Human: Fall Flat","Puzzle",2,"Same Screen"]
+      ["Ship of Fools","Action",2,"Same Screen"],["Ember Knights","Action",4,"Same Screen"],["Goat Simulator 3","Adventure",2,"Split Screen"],["Brotato","Action",4,"Same Screen"],
+      ["Human: Fall Flat","Puzzle",2,"Same Screen"]
     ].map((x,i)=>({id:"coop-ps5-"+i,name:x[0],platform:"PS5",genre:x[1],coop:true,image:"",link:"",description:"Local co-op: up to "+x[2]+" players · "+x[3]+"."}))
   ];
 
