@@ -138,11 +138,41 @@
     ].map((x,i)=>({id:"coop-ps5-"+i,name:x[0],platform:"PS5",genre:x[1],coop:true,image:"",link:"",description:"Local co-op: up to "+x[2]+" players · "+x[3]+"."}))
   ];
 
-  const initialCatalog=[...starterGames,...expansionGames,...coopGames];
+
+  const onlineCoopGames = [
+    ...[
+      ["Warframe","Shooter",4],["Destiny 2","Shooter",3],["Tom Clancy's The Division 2","Shooter",4],
+      ["Tom Clancy's The Division","Shooter",4],["Ghost Recon Wildlands","Shooter",4],["Ghost Recon Breakpoint","Shooter",4],
+      ["Far Cry 5","Action",2],["Far Cry 6","Action",2],["Dying Light","Horror",4],["Dying Light 2 Stay Human","Horror",4],
+      ["Monster Hunter: World","RPG",4],["Dauntless","Action",4],["Outriders","Shooter",3],["Remnant: From the Ashes","Shooter",3],
+      ["World War Z","Shooter",4],["Back 4 Blood","Shooter",4],["Aliens: Fireteam Elite","Shooter",3],["Payday 2: Crimewave Edition","Shooter",4],
+      ["Sniper Elite 4","Shooter",2],["Sniper Elite 5","Shooter",4],["No Man's Sky","Adventure",4],["ARK: Survival Evolved","Survival",4],
+      ["Conan Exiles","Survival",4],["Path of Exile","RPG",6],["The Elder Scrolls Online","RPG",4],
+      ["The Forest","Horror",4],["Generation Zero","Shooter",4],["Risk of Rain 2","Action",4],["Dead Island 2","Action",3],
+      ["The Division 2","Shooter",4],["Payday 3","Shooter",4],["Elden Ring","RPG",3],["Fallout 76","RPG",4],
+      ["Genshin Impact","RPG",4],["Call of Duty: Modern Warfare III","Shooter",4]
+    ].map((x,i)=>({id:"online-coop-ps4-"+i,name:x[0],platform:"PS4",genre:x[1],coop:true,onlineCoop:true,image:"",link:"",description:"Online co-op · up to "+x[2]+" players · each player needs their own console and internet. Check game mode and PS Plus requirements."})),
+    ...[
+      ["Helldivers 2","Shooter",4],["Returnal","Shooter",2],["Remnant II","Shooter",3],["Deep Rock Galactic","Shooter",4],
+      ["Monster Hunter Wilds","RPG",4],["Elden Ring Nightreign","Action",3],["Elden Ring","RPG",3],
+      ["Baldur's Gate 3","RPG",4],["Diablo IV","RPG",4],["Final Fantasy XIV","RPG",8],
+      ["No Man's Sky","Adventure",4],["Warframe","Shooter",4],["Destiny 2","Shooter",3],
+      ["The First Descendant","Shooter",4],["The Division 2","Shooter",4],["Outriders","Shooter",3],
+      ["Remnant: From the Ashes","Shooter",3],["World War Z: Aftermath","Shooter",4],["Back 4 Blood","Shooter",4],
+      ["Aliens: Fireteam Elite","Shooter",3],["Payday 3","Shooter",4],["Sniper Elite 5","Shooter",4],
+      ["Ghost Recon Breakpoint","Shooter",4],["Far Cry 6","Action",2],["Dying Light 2 Stay Human","Horror",4],
+      ["Dead Island 2","Action",3],["Fallout 76","RPG",4],["The Elder Scrolls Online","RPG",4],
+      ["Genshin Impact","RPG",4],["Gran Turismo 7","Racing",2],["The Forest","Horror",4],
+      ["Risk of Rain 2","Action",4],["V Rising","Survival",4],["Abiotic Factor","Survival",6]
+    ].map((x,i)=>({id:"online-coop-ps5-"+i,name:x[0],platform:"PS5",genre:x[1],coop:true,onlineCoop:true,image:"",link:"",description:"Online co-op · up to "+x[2]+" players · each player needs their own console and internet. Check game mode and PS Plus requirements."}))
+  ];
+
+  const initialCatalog=[...starterGames,...expansionGames,...coopGames,...onlineCoopGames];
   const coverFor = (name,platform) => coverOverrides[`${name}|${platform}`] || coverOverrides[name] || coverUrl(coverIds[name]) || "";
   expansionGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
   starterGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
   coopGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
+  onlineCoopGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
   let games = loadGames();
   function loadGames(){
     try {
@@ -152,10 +182,10 @@
       if(!Array.isArray(data)||data.length===0){localStorage.setItem(KEY,JSON.stringify(initialCatalog));return initialCatalog;}
       const merged=[...data];
       const knownNames=new Map(merged.map(x=>[String(x.name||"").toLowerCase()+"|"+x.platform,x]));
-      [...expansionGames,...coopGames].forEach(x=>{
+      [...expansionGames,...coopGames,...onlineCoopGames].forEach(x=>{
         const key=String(x.name||"").toLowerCase()+"|"+x.platform;
         const existing=knownNames.get(key);
-        if(existing){if(x.coop){existing.coop=true;existing.description=x.description;}}
+        if(existing){if(x.coop){existing.coop=true;if(x.onlineCoop){existing.onlineCoop=true;existing.description=(existing.description||"")+" · Online co-op also supported.";}}}
         else {const copy={...x};merged.push(copy);knownNames.set(key,copy);}
       });
       return merged.map(x=>({...x,image:(!x.image||/^https:\/\/shared\.fastly\.steamstatic\.com\/store_item_assets\/steam\/apps\/|^https:\/\/gmedia\.playstation\.com\/is\/image\/SIEPDC\//.test(x.image))?(coverFor(x.name,x.platform)||x.image):x.image}));
@@ -188,7 +218,7 @@
     const q=$("searchInput").value.trim().toLowerCase(), p=$("platformFilter").value;
     const filtered=games.filter(x=>(x.name||"").toLowerCase().includes(q)&&(!p||x.platform===p)&&(!activeCategory||(activeCategory==="Co-op"?x.coop===true:getCategory(x)===activeCategory)));
     document.querySelectorAll(".category-btn").forEach(b=>b.classList.toggle("active",b.dataset.category===activeCategory));
-    $("gamesGrid").innerHTML=filtered.map(x=>`<article class="game-card game-card-clickable" data-details="${esc(x.id)}" tabindex="0" role="button" aria-label="عرض تفاصيل ${esc(x.name)}"><div class="game-cover">${x.image?`<img src="${esc(x.image)}" alt="${esc(x.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false">`:""}<span class="cover-placeholder" ${x.image?'hidden':''}>XH007</span><span class="platform-tag">${esc(x.platform)}</span></div><div class="game-info"><h3>${esc(x.name)}</h3><div class="game-meta"><span>${esc(getCategory(x))}</span>${x.coop?`<span class="coop-tag">LOCAL CO-OP</span>`:""}<span>✦</span><span>اضغط للتفاصيل</span></div></div></article>`).join("");
+    $("gamesGrid").innerHTML=filtered.map(x=>`<article class="game-card game-card-clickable" data-details="${esc(x.id)}" tabindex="0" role="button" aria-label="عرض تفاصيل ${esc(x.name)}"><div class="game-cover">${x.image?`<img src="${esc(x.image)}" alt="${esc(x.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false">`:""}<span class="cover-placeholder" ${x.image?'hidden':''}>XH007</span><span class="platform-tag">${esc(x.platform)}</span></div><div class="game-info"><h3>${esc(x.name)}</h3><div class="game-meta"><span>${esc(getCategory(x))}</span>${x.coop?`<span class="coop-tag">${x.onlineCoop?(x.description&&x.description.startsWith("Local")?"LOCAL + ONLINE CO-OP":"ONLINE CO-OP"):"LOCAL CO-OP"}</span>`:""}<span>✦</span><span>اضغط للتفاصيل</span></div></div></article>`).join("");
     $("emptyState").hidden=filtered.length!==0;
     $("gamesGrid").style.display=filtered.length?"grid":"none";
     $("adminList").innerHTML=games.length?games.map(x=>`<div class="admin-row"><img class="admin-thumb" src="${esc(x.image||"")}" onerror="this.style.visibility='hidden'" alt=""><div class="admin-row-info"><b>${esc(x.name)}</b><small>${esc(x.platform)} · ${esc(getCategory(x))}</small></div><button class="mini-btn" data-edit="${x.id}">تعديل</button><button class="mini-btn delete" data-delete="${x.id}">حذف</button></div>`).join(""):`<p class="muted">لا توجد ألعاب مضافة حتى الآن.</p>`;
