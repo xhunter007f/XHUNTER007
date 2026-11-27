@@ -77,7 +77,52 @@
       ["Avatar: Frontiers of Pandora","Adventure"],["Warhammer 40,000: Space Marine 2","Action"]
     ].map((x,i)=>({id:"ps5-extra-"+i,name:x[0],platform:"PS5",genre:x[1],image:"",link:"",description:""}))
   ];
-  const initialCatalog=[...starterGames,...expansionGames];
+
+  const coopGames = [
+    ...[
+      ["It Takes Two","Adventure",2,"Split Screen"],["A Way Out","Adventure",2,"Split Screen"],["Unravel Two","Adventure",2,"Same Screen"],
+      ["Sackboy: A Big Adventure","Adventure",4,"Same Screen"],["LittleBigPlanet 3","Adventure",4,"Same Screen"],["Rayman Legends","Adventure",4,"Same Screen"],
+      ["Overcooked!","Puzzle",4,"Same Screen"],["Overcooked! 2","Puzzle",4,"Same Screen"],["Moving Out","Puzzle",4,"Same Screen"],
+      ["Lovers in a Dangerous Spacetime","Action",4,"Same Screen"],["Trine 4: The Nightmare Prince","Adventure",4,"Same Screen"],
+      ["Trine 5: A Clockwork Conspiracy","Adventure",4,"Same Screen"],["Minecraft","Adventure",4,"Split Screen"],
+      ["Stardew Valley","RPG",4,"Same Screen"],["Don't Starve Together","Survival",2,"Same Screen"],["Terraria","Adventure",2,"Split Screen"],
+      ["Divinity: Original Sin 2","RPG",2,"Same Screen"],["Diablo III: Eternal Collection","RPG",4,"Same Screen"],
+      ["Borderlands: The Handsome Collection","Shooter",4,"Split Screen"],["Borderlands 3","Shooter",4,"Split Screen"],
+      ["Resident Evil 5","Horror",2,"Split Screen"],["Resident Evil 6","Horror",2,"Split Screen"],
+      ["Resident Evil: Revelations 2","Horror",2,"Split Screen"],["Cuphead","Action",2,"Same Screen"],
+      ["Streets of Rage 4","Action",4,"Same Screen"],["Teenage Mutant Ninja Turtles: Shredder's Revenge","Action",6,"Same Screen"],
+      ["Castle Crashers Remastered","Action",4,"Same Screen"],["Broforce","Action",4,"Same Screen"],
+      ["HELLDIVERS","Shooter",4,"Same Screen"],["Magicka 2","Action",4,"Same Screen"],
+      ["Guacamelee! 2","Action",2,"Same Screen"],["Cat Quest II","RPG",2,"Same Screen"],
+      ["Children of Morta","RPG",2,"Same Screen"],["Outward: Definitive Edition","RPG",2,"Split Screen"],
+      ["The Ascent","Shooter",4,"Same Screen"],["Unrailed!","Puzzle",4,"Same Screen"],
+      ["Human: Fall Flat","Puzzle",2,"Same Screen"],["Keep Talking and Nobody Explodes","Puzzle",2,"Pass-and-Play"],
+      ["Spelunky 2","Adventure",4,"Same Screen"],["Enter the Gungeon","Action",2,"Same Screen"],
+      ["Lovers in a Dangerous Spacetime","Action",4,"Same Screen"],["Guns, Gore & Cannoli 2","Action",4,"Same Screen"],
+      ["LEGO Marvel Super Heroes 2","Adventure",2,"Same Screen"],["LEGO Star Wars: The Skywalker Saga","Adventure",2,"Same Screen"],
+      ["LEGO DC Super-Villains","Adventure",2,"Same Screen"],["LEGO Jurassic World","Adventure",2,"Same Screen"],
+      ["Minecraft Dungeons","Action",4,"Same Screen"],["Rayman Origins","Adventure",4,"Same Screen"],
+      ["Guacamelee! Super Turbo Championship Edition","Action",2,"Same Screen"],["Scott Pilgrim vs. The World: The Game","Action",4,"Same Screen"],
+      ["TMNT: Mutants in Manhattan","Action",4,"Online only"],["The Dark Pictures: Man of Medan","Horror",2,"Shared Story / Movie Night"]
+    ].map((x,i)=>({id:"coop-ps4-"+i,name:x[0],platform:"PS4",genre:x[1],coop:true,image:"",link:"",description:"Local co-op: up to "+x[2]+" players · "+x[3]+"."})),
+    ...[
+      ["Split Fiction","Adventure",2,"Split Screen"],["It Takes Two","Adventure",2,"Split Screen"],
+      ["Sackboy: A Big Adventure","Adventure",4,"Same Screen"],["Overcooked! All You Can Eat","Puzzle",4,"Same Screen"],
+      ["Moving Out 2","Puzzle",4,"Same Screen"],["Baldur's Gate 3","RPG",2,"Split Screen"],
+      ["Diablo IV","RPG",2,"Same Screen"],["Borderlands 3","Shooter",4,"Split Screen"],
+      ["Tiny Tina's Wonderlands","Shooter",4,"Split Screen"],["The Ascent","Shooter",4,"Same Screen"],
+      ["Trine 5: A Clockwork Conspiracy","Adventure",4,"Same Screen"],["Teenage Mutant Ninja Turtles: Shredder's Revenge","Action",6,"Same Screen"],
+      ["Minecraft","Adventure",4,"Split Screen"],["Cult of the Lamb","Action",2,"Same Screen"],
+      ["Cat Quest III","RPG",2,"Same Screen"],["LEGO Horizon Adventures","Adventure",2,"Same Screen"],
+      ["LEGO Star Wars: The Skywalker Saga","Adventure",2,"Same Screen"],["Vampire Survivors","Action",4,"Same Screen"],
+      ["Nobody Saves the World","Action",2,"Same Screen"],["PlateUp!","Puzzle",4,"Same Screen"],
+      ["Ship of Fools","Action",2,"Same Screen"],["Ember Knights","Action",4,"Same Screen"],
+      ["Moving Out 2","Puzzle",4,"Same Screen"],["Human: Fall Flat","Puzzle",2,"Same Screen"],
+      ["Untitled Goose Game","Puzzle",2,"Same Screen"]
+    ].map((x,i)=>({id:"coop-ps5-"+i,name:x[0],platform:"PS5",genre:x[1],coop:true,image:"",link:"",description:"Local co-op: up to "+x[2]+" players · "+x[3]+"."}))
+  ];
+
+  const initialCatalog=[...starterGames,...expansionGames,...coopGames];
   const coverFor = (name,platform) => coverOverrides[`${name}|${platform}`] || coverOverrides[name] || coverUrl(coverIds[name]) || "";
   expansionGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
   starterGames.forEach(x=>{x.image=coverFor(x.name,x.platform);});
@@ -89,8 +134,13 @@
       const data=JSON.parse(raw);
       if(!Array.isArray(data)||data.length===0){localStorage.setItem(KEY,JSON.stringify(initialCatalog));return initialCatalog;}
       const merged=[...data];
-      const known=new Set(merged.map(x=>String(x.id)));
-      expansionGames.forEach(x=>{if(!known.has(String(x.id)))merged.push({...x});});
+      const knownNames=new Map(merged.map(x=>[String(x.name||"").toLowerCase()+"|"+x.platform,x]));
+      [...expansionGames,...coopGames].forEach(x=>{
+        const key=String(x.name||"").toLowerCase()+"|"+x.platform;
+        const existing=knownNames.get(key);
+        if(existing){if(x.coop){existing.coop=true;existing.description=x.description;}}
+        else {const copy={...x};merged.push(copy);knownNames.set(key,copy);}
+      });
       return merged.map(x=>({...x,image:(!x.image||/^https:\/\/shared\.fastly\.steamstatic\.com\/store_item_assets\/steam\/apps\/|^https:\/\/gmedia\.playstation\.com\/is\/image\/SIEPDC\//.test(x.image))?(coverFor(x.name,x.platform)||x.image):x.image}));
     } catch {localStorage.setItem(KEY,JSON.stringify(initialCatalog));return initialCatalog;}
   }
@@ -119,9 +169,9 @@
     $("gameCount").textContent=games.length;
     $("adminCount").textContent=`${games.length} لعبة`;
     const q=$("searchInput").value.trim().toLowerCase(), p=$("platformFilter").value;
-    const filtered=games.filter(x=>(x.name||"").toLowerCase().includes(q)&&(!p||x.platform===p)&&(!activeCategory||getCategory(x)===activeCategory));
+    const filtered=games.filter(x=>(x.name||"").toLowerCase().includes(q)&&(!p||x.platform===p)&&(!activeCategory||(activeCategory==="Co-op"?x.coop===true:getCategory(x)===activeCategory)));
     document.querySelectorAll(".category-btn").forEach(b=>b.classList.toggle("active",b.dataset.category===activeCategory));
-    $("gamesGrid").innerHTML=filtered.map(x=>`<article class="game-card game-card-clickable" data-details="${esc(x.id)}" tabindex="0" role="button" aria-label="عرض تفاصيل ${esc(x.name)}"><div class="game-cover">${x.image?`<img src="${esc(x.image)}" alt="${esc(x.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false">`:""}<span class="cover-placeholder" ${x.image?'hidden':''}>XH007</span><span class="platform-tag">${esc(x.platform)}</span></div><div class="game-info"><h3>${esc(x.name)}</h3><div class="game-meta"><span>${esc(getCategory(x))}</span><span>✦</span><span>اضغط للتفاصيل</span></div></div></article>`).join("");
+    $("gamesGrid").innerHTML=filtered.map(x=>`<article class="game-card game-card-clickable" data-details="${esc(x.id)}" tabindex="0" role="button" aria-label="عرض تفاصيل ${esc(x.name)}"><div class="game-cover">${x.image?`<img src="${esc(x.image)}" alt="${esc(x.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false">`:""}<span class="cover-placeholder" ${x.image?'hidden':''}>XH007</span><span class="platform-tag">${esc(x.platform)}</span></div><div class="game-info"><h3>${esc(x.name)}</h3><div class="game-meta"><span>${esc(getCategory(x))}</span>${x.coop?`<span class="coop-tag">LOCAL CO-OP</span>`:""}<span>✦</span><span>اضغط للتفاصيل</span></div></div></article>`).join("");
     $("emptyState").hidden=filtered.length!==0;
     $("gamesGrid").style.display=filtered.length?"grid":"none";
     $("adminList").innerHTML=games.length?games.map(x=>`<div class="admin-row"><img class="admin-thumb" src="${esc(x.image||"")}" onerror="this.style.visibility='hidden'" alt=""><div class="admin-row-info"><b>${esc(x.name)}</b><small>${esc(x.platform)} · ${esc(getCategory(x))}</small></div><button class="mini-btn" data-edit="${x.id}">تعديل</button><button class="mini-btn delete" data-delete="${x.id}">حذف</button></div>`).join(""):`<p class="muted">لا توجد ألعاب مضافة حتى الآن.</p>`;
@@ -136,7 +186,7 @@
   $("gamesGrid").addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches("[data-details]")){e.preventDefault();showDetails(e.target.dataset.details);}});
   $("closeDetails").addEventListener("click",()=>detailsDialog.close());
   $("openAdmin").addEventListener("click",openAdmin);$("heroAdmin").addEventListener("click",openAdmin);$("addGameTop").addEventListener("click",()=>{openAdmin();resetForm();});$("emptyAdd").addEventListener("click",()=>{openAdmin();resetForm();});
-  $("gameForm").addEventListener("submit",e=>{e.preventDefault();const id=$("editId").value;const item={id:id||String(Date.now()),name:$("gameName").value.trim(),platform:$("gamePlatform").value,genre:$("gameGenre").value,image:$("gameImage").value.trim(),link:$("gameLink").value.trim(),description:$("gameDescription").value.trim()};if(!item.name)return;if(id){games=games.map(x=>x.id===id?item:x);toast("تم تحديث اللعبة");}else{games.unshift(item);toast("تمت إضافة اللعبة");}save();resetForm();});
+  $("gameForm").addEventListener("submit",e=>{e.preventDefault();const id=$("editId").value;const item={id:id||String(Date.now()),coop:!!games.find(x=>x.id===id)?.coop,name:$("gameName").value.trim(),platform:$("gamePlatform").value,genre:$("gameGenre").value,image:$("gameImage").value.trim(),link:$("gameLink").value.trim(),description:$("gameDescription").value.trim()};if(!item.name)return;if(id){games=games.map(x=>x.id===id?item:x);toast("تم تحديث اللعبة");}else{games.unshift(item);toast("تمت إضافة اللعبة");}save();resetForm();});
   $("cancelEdit").addEventListener("click",resetForm);
   $("adminList").addEventListener("click",e=>{const edit=e.target.dataset.edit,del=e.target.dataset.delete;if(edit)startEdit(edit);if(del&&confirm("متأكد من حذف اللعبة؟")){games=games.filter(x=>x.id!==del);save();toast("تم حذف اللعبة");}});
   ["searchInput","platformFilter"].forEach(id=>$(id).addEventListener(id==="searchInput"?"input":"change",render));
